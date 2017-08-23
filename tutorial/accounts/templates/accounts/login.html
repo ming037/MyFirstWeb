@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
+{% extends 'base.html' %}
 
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'accounts/style.css' %}" type="text/css">
-    </head>
-    <body>
-        <div class="container">
-            <h1>Welcome</h1>
-            Welcome! You can login here!
-            <button type="button" class="btn btn-primary">Login</button>
-        </div>
-        <div class="jumbotron">
-            <h1>Welcome!</h1>
-        </div>
-        <h1>{{ myName }}</h1>
-        <ul>
-            {% for number in numbers %}
-            <li>{{ number }}</li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% block body %}
+<div class="container">
+  <h1>Welcome</h1>
+  <p>
+      You can log in here!
+  </p>
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+</div>
+{% endblock %}
