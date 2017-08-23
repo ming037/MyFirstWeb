@@ -9,4 +9,5 @@ def home(request):
     name = "HWI HAN"
 
     args = {'myName':name, 'numbers':numbers}
-    return render(request, 'accounts/login.html', args)   #HttpResponse('Home page!')
+    return render(request, 'accounts/home.html', args)
+    #return render(request, 'accounts/login.html', args)   #HttpResponse('Home page!')
