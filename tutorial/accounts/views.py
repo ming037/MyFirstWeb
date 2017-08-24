@@ -33,10 +33,10 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(requet.POST, instance=request.user)
+        form = UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/account/pofile')
+            return redirect('/account/profile')
     else: # Get
         form = UserChangeForm(instance=request.user)
         args ={'form': form}
