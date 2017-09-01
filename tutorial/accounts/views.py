@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render,redirect
-from accounts.forms import RegistrationForm
+from accounts.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 
@@ -33,11 +33,11 @@ def view_profile(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user) #UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('/account/profile')
     else: # Get
-        form = UserChangeForm(instance=request.user)
+        form = EditProfileForm(instance=request.user) #UserChangeForm(instance=request.user)
         args ={'form': form}
         return render(request, 'accounts/edit_profile.html', args)
