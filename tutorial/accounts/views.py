@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required # 로그인 하지 않
 
 # Create your views here.
 
-@login_required
 def home(request):
     numbers = [1,2,3,4,5]
     name = "HWI HAN"
@@ -31,12 +30,12 @@ def register(request):
         args ={'form':form}
         return render(request, 'accounts/reg_form.html', args)
 
-@login_required   #decorator 기능, 로그인 하지 않으면 404에러 띄움
+#@login_required   #decorator 기능, 로그인 하지 않으면 404에러 띄움
 def view_profile(request):
     args = {'user':request.user}
     return render(request, 'accounts/profile.html', args)
 
-@login_required
+
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user) #UserChangeForm(request.POST, instance=request.user)
@@ -48,7 +47,7 @@ def edit_profile(request):
         args ={'form': form}
         return render(request, 'accounts/edit_profile.html', args)
 
-@login_required
+
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
