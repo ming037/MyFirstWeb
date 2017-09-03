@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.urls import reverse # url 하드코딩 없애기 위해서 사용
 from django.shortcuts import render,redirect
 from accounts.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.models import User
@@ -41,7 +42,7 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user) #UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/account/profile')
+            return redirect(reverse('view_profile'))  # redirect('/account/profile')
     else: # Get
         form = EditProfileForm(instance=request.user) #UserChangeForm(instance=request.user)
         args ={'form': form}
@@ -54,9 +55,9 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('/account/profile')
+            return  redirect(reverse('view_profile')) # redirect('/account/profile')
         else:
-            return redirect('/account/change-password')
+            return  redirect(reverse('change_password')) #redirect('/account/change-password')
     else: # Get
         form = PasswordChangeForm(user=request.user)
         args ={'form': form}
