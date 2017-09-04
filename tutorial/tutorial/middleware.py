@@ -28,8 +28,9 @@ class LoginRequiredMiddleware:
         #         return redirect(settings.LOGIN_URL)
 
         url_is_exempt = any(url.match(path) for url in EXEMPT_URLS)
-        
-        if path == reverse('logout').lstrip('/'): #하드코딩 막기 위해 reverse함수를 쓴다. urls.py에서 name부분  #'account/logout/':  #이게 없으면 로그아웃이 안 됨.
+
+        # 아래 revers의 accounts는 namespace 이다. 이게 tutorial.urls.py를 참고할 것.
+        if path == reverse('accounts:logout').lstrip('/'): #하드코딩 막기 위해 reverse함수를 쓴다. urls.py에서 name부분  #'account/logout/':  #이게 없으면 로그아웃이 안 됨.
             logout(request)
 
         if request.user.is_authenticated() and url_is_exempt:  #login 이미 했으면 login이나 register에 접근할 수 없다.

@@ -24,7 +24,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()  # 유저 생성해서 DB에 넣음
-            return redirect('/account')
+            return redirect(reverse('accounts:home'))#redirect('/account')
     else: #GET일 경우
         form = RegistrationForm()
 
@@ -42,7 +42,7 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user) #UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect(reverse('view_profile'))  # redirect('/account/profile')
+            return redirect(reverse('accounts:view_profile'))  # redirect('/account/profile')
     else: # Get
         form = EditProfileForm(instance=request.user) #UserChangeForm(instance=request.user)
         args ={'form': form}
@@ -57,7 +57,7 @@ def change_password(request):
             update_session_auth_hash(request, form.user)
             return  redirect(reverse('view_profile')) # redirect('/account/profile')
         else:
-            return  redirect(reverse('change_password')) #redirect('/account/change-password')
+            return  redirect(reverse('accounts:change_password')) #redirect('/account/change-password')
     else: # Get
         form = PasswordChangeForm(user=request.user)
         args ={'form': form}
