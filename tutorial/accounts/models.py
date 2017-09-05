@@ -11,6 +11,9 @@ class UserProfile(models.Model):
     website = models.URLField(default='')
     phone = models.IntegerField(default=0)
 
+    def __str__(self): # admin 페이지에서 user_profile 제목이 유저 이름으로 나오게 함.
+        return self.user.username
+
 def create_profile(sender, **kwargs):
     if kwargs['created']: #connet에서 sender=User의 User가 create되면 아래 코드 실행
         user_Profile = UserProfile.objects.create(user=kwargs['instance'])
