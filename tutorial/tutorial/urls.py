@@ -17,9 +17,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from tutorial import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('accounts.urls', namespace='accounts')), #namespce를 쓰면, 여러개의 앱을 하나의 서버에서 사용할 때 분리할 수 있다.
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
