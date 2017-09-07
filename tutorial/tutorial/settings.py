@@ -118,11 +118,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/' # https://docs.djangoproject.com/en/1.11/howto/static-files/ 참고
 MEDIA_ROOT = os.path.join(BASE_DIR, 'tutorial/media') #tutorial폴더에 media폴더 만들고 거기에 파일 업로드
+
+
 
 LOGIN_REDIRECT_URL='/account/'
 
