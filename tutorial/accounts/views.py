@@ -10,7 +10,7 @@ from django.contrib.auth import update_session_auth_hash # redirect해도 로그
 from django.contrib.auth.decorators import login_required # 로그인 하지 않은 상태에서 페이지에 접근 못하게 하기 위함
 
 # Create your views here.
-
+'''
 def home(request):
     numbers = [1,2,3,4,5]
     name = "HWI HAN"
@@ -18,7 +18,7 @@ def home(request):
     args = {'myName':name, 'numbers':numbers}
     return render(request, 'accounts/home.html', args)
     #return render(request, 'accounts/login.html', args)   #HttpResponse('Home page!')
-
+'''
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
