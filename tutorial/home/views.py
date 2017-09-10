@@ -8,7 +8,7 @@ class HomeView(TemplateView):
 
     def get(self, request):
         form = HomeForm()
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-created') #Post.objects.all()
 
         args = {'form':form, 'posts':posts}
         return render(request, self.template_name,args)
