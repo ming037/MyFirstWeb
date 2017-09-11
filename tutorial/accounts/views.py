@@ -32,8 +32,12 @@ def register(request):
         return render(request, 'accounts/reg_form.html', args)
 
 #@login_required   #decorator 기능, 로그인 하지 않으면 404에러 띄움
-def view_profile(request):
-    args = {'user':request.user}
+def view_profile(request, pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user= request.user
+    args = {'user':user}
     return render(request, 'accounts/profile.html', args)
 
 
