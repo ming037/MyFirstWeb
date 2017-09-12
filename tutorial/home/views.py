@@ -10,7 +10,8 @@ class HomeView(TemplateView):
     def get(self, request):
         form = HomeForm()
         posts = Post.objects.all().order_by('-created') #Post.objects.all()
-        users = User.objects.all()
+        #users = User.objects.all()
+        users = User.objects.exclude(id=request.user.id) # 디비에 있는 모든 데이터 얻어오고 인자에 있는 건 필터링한다. 
 
         args = {'form':form, 'posts':posts, 'users':users}
         return render(request, self.template_name,args)
