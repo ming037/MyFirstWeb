@@ -126,7 +126,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'tutorial/media') #tutorial폴더에 media�
 
 
 
-LOGIN_REDIRECT_URL='/account/'
+LOGIN_REDIRECT_URL='/home/'
 
 LOGIN_URL = '/account/login/'
 

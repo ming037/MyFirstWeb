@@ -2,7 +2,7 @@ from django.views.generic import TemplateView #for class bases views
 from home.forms import HomeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from home.models import Post
+from home.models import Post, Friend
 
 class HomeView(TemplateView):
     template_name = 'home/home.html'
@@ -11,9 +11,11 @@ class HomeView(TemplateView):
         form = HomeForm()
         posts = Post.objects.all().order_by('-created') #Post.objects.all()
         #users = User.objects.all()
-        users = User.objects.exclude(id=request.user.id) # 디비에 있는 모든 데이터 얻어오고 인자에 있는 건 필터링한다. 
+        users = User.objects.exclude(id=request.user.id) # 디비에 있는 모든 데이터 얻어오고 인자에 있는 건 필터링한다.
+        friend = Friend.objects.get(current_user=request.user)
+        friends = friend.users.all()
 
-        args = {'form':form, 'posts':posts, 'users':users}
+        args = {'form':form, 'posts':posts, 'users':users, 'friends':friends}
         return render(request, self.template_name,args)
 
     def post(self, request):
@@ -28,3 +30,14 @@ class HomeView(TemplateView):
             return redirect('home:home') #이렇게 하면 페이지 초기화. 데이터 전송 같은거 하고 난 후 쓰면 됨.
         args = {'form': form, 'text':text}
         return render(request, self.template_name, args)
+
+def change_friends(request, operation, pk):
+    friend = User.objects.get(pk=pk)
+
+    if operation == 'add':
+        Friend.make_friend(request.user, friend)
+    elif operation == 'remove':
+        Friend.lose_friend(request.user, friend)
+
+
+    return redirect('home:home')

@@ -24,7 +24,7 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()  # 유저 생성해서 DB에 넣음
-            return redirect(reverse('accounts:home'))#redirect('/account')
+            return redirect(reverse('home:home'))#redirect('/account')
     else: #GET일 경우
         form = RegistrationForm()
 
