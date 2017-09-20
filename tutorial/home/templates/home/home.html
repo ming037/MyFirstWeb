@@ -23,12 +23,24 @@
           <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
             <h3>{{ user.username }}</h3>
           </a>
+          {% if user not in friends %}
+          <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
+            <!-- https://getbootstrap.com/docs/3.3/css/#buttons -->
+            <button type="button" class="btn btn-success">Add friend</button>
+          </a>
+          {% endif %}
+
         {% endfor %}
         <h2>Friends</h2>
         {% for friend in friends%}
-          <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+          <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
             <h3>{{ friend.username }}</h3>
           </a>
+          <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+            <!-- Standard button -->
+            <button type="button" class="btn btn-default">Remove friend</button>
+          </a>
+
         {% endfor %}
 
     </div>
